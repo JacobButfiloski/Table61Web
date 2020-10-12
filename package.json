@@ -1,0 +1,17 @@
+{
+  "name": "table61",
+  "version": "1.0.0",
+  "description": "Web based table seating program",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^10.1.2"
+  },
+  "dependencies": {
+    "easytimer.js": "^4.3.0"
+  }
+}

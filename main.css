@@ -1,0 +1,52 @@
+#inputDiv {
+    float: left;
+    background-color: #141318;
+    height: 100vh;
+    width: 20%;
+}
+
+#visualDiv {
+    float: right;
+    display:block;
+    background-color: #191B20;
+    height: 100vh;
+    width: 80%;
+}
+
+head {
+    background-color: #141318;
+}
+
+body {
+    background-color: #141318;
+}
+
+
+#nameInput {
+    width: 100%;
+    position: relative;
+    width: 50%;
+}
+
+#inputPartySize {
+    width: 50%;
+}
+
+.inputLabel{
+}
+
+#versionTag {
+    color: white;
+}
+
+.tableButton {
+    width: 100px;
+    height: 100px;
+    background-color: #121419;
+    border: 2px solid darkgray;
+    color: darkgray;
+}
+
+.tableButton:focus {
+    outline: 0;
+}
