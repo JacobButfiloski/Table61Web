@@ -14,6 +14,48 @@ function init()
     console.log("test");
 }
 
+//Handler When Edit Reservations is Clicked
+var toggleEditResos = false;
+function editResosClicked()
+{
+    toggleEditResos = !toggleEditResos;
+
+    if(toggleEditResos == true)
+    {
+        document.getElementById("visualDiv").style.display = 'none';
+        document.getElementById("reservationCreation").style.display = 'block';
+        document.getElementById("resoList").style.display = 'none';
+    } else {
+        document.getElementById("visualDiv").style.display = 'block';
+        document.getElementById("reservationCreation").style.display = 'none';
+        document.getElementById("resoList").style.display = 'none';
+    }
+}
+
+var toggleResoList = true;
+function viewResoList()
+{
+    toggleResoList = !toggleResoList;
+
+    if(toggleResoList == true)
+    {
+        document.getElementById("visualDiv").style.display = 'block';
+        document.getElementById("reservationCreation").style.display = 'none';
+        document.getElementById("resoList").style.display = 'none';
+    } else {
+        document.getElementById("visualDiv").style.display = 'none';
+        document.getElementById("reservationCreation").style.display = 'none';
+        document.getElementById("resoList").style.display = 'block';
+    }
+    
+    var resos = "";
+    for(var i = 0; i < reservationList.length; i++)
+    {
+        resos +=  "{" + reservationList[i].time + "} [" + reservationList[i].partysize + "] " + reservationList[i].lastname + " " + reservationList[i].firstname + "<br>";
+    }
+    document.getElementById("resoP").innerHTML = resos;
+}
+
 //Handler When Table is Clicked
 function buttonHandler(index)
 {

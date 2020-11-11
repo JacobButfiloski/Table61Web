@@ -13,6 +13,22 @@
     width: 80%;
 }
 
+#reservationCreation {
+    float: right;
+    display:block;
+    background-color: #191B20;
+    height: 100vh;
+    width: 80%;
+}
+
+#resoList {
+    float: right;
+    display:block;
+    background-color: #191B20;
+    height: 100vh;
+    width: 80%;
+}
+
 head {
     background-color: #141318;
 }

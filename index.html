@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="main.css">
 <script src="main.js"></script>
+<script src="reservation.js"></script>
 <html>
   <head>
     <meta charset="UTF-8">
     <p id="versionTag">Created by Jake the #1 Host at 1961. Version 1.0.0</p>
-    <input type="date" id="dateTimeSelection">
-    <input type ="button" id="unseatAllButton" onclick="unseatAllButtonHandler()">
+    <input type="button" id="resoButton" value="Edit Resos" onclick="editResosClicked()">
+    <input type ="button" id="unseatAllButton" onclick="unseatAllButtonHandler()" value="Unseat All">
+    <input type = "button" id="viewResos" value="View Resos" onclick="viewResoList()">
+    <input type="button" id="generateTableMap" value="Map Tables" onclick="">
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
   </head>
@@ -28,7 +31,7 @@
         <input class="tableButton" type="button" value="12" id="table12" onclick="buttonHandler(12)" style="position: absolute; right: 20%; top: 25%">
         <input class="tableButton" type="button" value="13" id="table13" onclick="buttonHandler(13)" style="position: absolute; right: 20%; top: 40%">
         <input class="tableButton" type="button" value="14" id="table14" onclick="buttonHandler(14)" style="position: absolute; right: 20%; top: 55%">
-        <input class="tableButton" type="button" value="21" id="table21" onclick="buttonHandler(21)" style="position: absolute; right: 35%; top: 6%; width: 200px;">
+        <input class="tableButton" type="button" value="21" id="table21" onclick="buttonHandler(21)" style="position: absolute; right: 35%; top: 8%; width: 200px;">
         <input class="tableButton" type="button" value="22" id="table22" onclick="buttonHandler(22)" style="position: absolute; right: 30%; top: 20%">
         <input class="tableButton" type="button" value="23" id="table23" onclick="buttonHandler(23)" style="position: absolute; right: 30%; top: 40%">
         <input class="tableButton" type="button" value="24" id="table24" onclick="buttonHandler(24)" style="position: absolute; right: 30%; top: 60%">
@@ -43,7 +46,25 @@
         <input class="tableButton" type="button" value="53" id="table53" onclick="buttonHandler(53)" style="position: absolute; right: 60%; top: 35%; width: 200px;">
         <input class="tableButton" type="button" value="54" id="table54" onclick="buttonHandler(54)" style="position: absolute; right: 60%; top: 50%; width: 200px;">
         <input class="tableButton" type="button" value="55" id="table55" onclick="buttonHandler(55)" style="position: absolute; right: 60%; top: 70%">
-        <input class="tableButton" type="button" value="61" id="table61" onclick="buttonHandler(61)" style="position: absolute; right: 55%; top: 6%">
+        <input class="tableButton" type="button" value="61" id="table61" onclick="buttonHandler(61)" style="position: absolute; right: 55%; top: 8%">
+    </div>
+    <div id="reservationCreation">
+      <label style="display: block; color: darkgray;">First Name:</label>
+      <input id="firstName" type="text" class="nameInput">
+      <label style="display: block; color: darkgray;">Last Name:</label>
+      <input id="lastName" type="text" class="nameInput">
+      <label style="display: block; color: darkgray;">Party Size:</label>
+      <input id="partySize" type="number" class="nameInput">
+      <label style="display: block; color: darkgray;">Date:</label>
+      <input id="partyDate" type="date" class="nameInput">
+      <label style="display: block; color: darkgray;">Time:</label>
+      <input id="partyTime" type="time" class="nameInput">
+      <input type="button" value = "Submit" style="display: block; margin-top: 10px;" onclick="SubmitClicked()">
+    </div>
+    <div id="resoList">
+      <p style="color: white;" id="resoP">
+        Reservation List:
+      </p>
     </div>
   </body>
 </html>
