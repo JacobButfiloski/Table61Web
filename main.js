@@ -1,7 +1,9 @@
 var lastClickedIndex = 0; //Store Index of Last Clicked Tables
+//Table Class Variables
 var partyNames = [];
 var partySizes = [];
 var timesSat = [];
+var timesSatHHMM = [];
 
 let state = 'default';
 
@@ -9,9 +11,46 @@ window.addEventListener('load', function () {
     init();
   })
 
+//Runs on page open
 function init()
 {
     console.log("test");
+    document.getElementById("inputDiv").style.display = 'none';
+}
+
+//Runs when menu button is clicked
+function menuListener(handler, button)
+{
+    switch(handler)
+    {
+        case "floor":
+            state = 'default';
+            document.getElementById("floorplanDiv").style.display = 'block';
+            break;
+        case "reservations":
+            state = 'reservations';
+            document.getElementById("floorplanDiv").style.display = 'none';
+            break;
+        case "settings":
+            state = 'settings';
+            document.getElementById("floorplanDiv").style.display = 'none';
+            break;
+        case "help":
+            state = 'help';
+            document.getElementById("floorplanDiv").style.display = 'none';
+            break;
+    }
+    resetMenuButtonColors();
+    button.style.color = 'red';
+}
+
+//Reset UI button colors to default
+function resetMenuButtonColors()
+{
+    var all = document.getElementsByClassName('menuButton');
+    for (var i = 0; i < all.length; i++) {  
+        all[i].style.color = 'whitesmoke';
+    }
 }
 
 //Handler When Edit Reservations is Clicked
@@ -60,6 +99,7 @@ function viewResoList()
 function buttonHandler(index)
 {
     console.log("selected " + index);
+    document.getElementById("inputDiv").style.display = 'block';
     lastClickedIndex = index;
     var list = returnTableList();
     console.log(list);
@@ -86,7 +126,8 @@ function buttonHandler(index)
     
     document.getElementById("nameInput").value = (partyNames[lastClickedIndex] != null) ? partyNames[lastClickedIndex] : "";
     document.getElementById("inputPartySize").value = (partySizes[lastClickedIndex] != null) ? partySizes[lastClickedIndex] : 0;
-    document.getElementById("timeSat").innerHTML = "Table was sat " + totalDif + " minutes ago."
+    document.getElementById("timeSat").innerHTML = 'Table was sat <span class="info">' + totalDif + '</span> minutes ago.';
+    document.getElementById("timeSathhmm").innerHTML = (timesSatHHMM[lastClickedIndex] != null) ?  "Sat at " + timesSatHHMM[lastClickedIndex][0] + ":" + timesSatHHMM[lastClickedIndex][1] : "Sat at 00:00";
 }
 
 //Handler when Seat is Clicked
@@ -96,9 +137,14 @@ function inputDataButtonHandler()
     var size = document.getElementById("inputPartySize").value;
     var tempDate = new Date();
     var timeSat = [tempDate.getHours(), tempDate.getMinutes()];
+    var tempTimehh = tempDate.getHours();
+    var tempTimemm = (tempDate.getMinutes() < 10) ? "0" + tempDate.getMinutes() : tempDate.getMinutes();
+    tempTimehh = ((tempTimehh + 11) % 12 + 1);
     partyNames[lastClickedIndex] = val;
     partySizes[lastClickedIndex] = size;
     timesSat[lastClickedIndex] = timeSat;
+    timesSatHHMM[lastClickedIndex] = [tempTimehh, tempTimemm];
+    document.getElementById("timeSathhmm").innerHTML = (timesSatHHMM[lastClickedIndex] != null) ?  "Sat at " + timesSatHHMM[lastClickedIndex][0] + ":" + timesSatHHMM[lastClickedIndex][1] : "Sat at 00:00";
     returnButtonFromLastClicked().value = lastClickedIndex + " " + val + "[" + size + "]";
 }
 
@@ -111,10 +157,12 @@ function clearButtonHandler()
     partyNames[lastClickedIndex] = null;
     partySizes[lastClickedIndex] = null;
     timesSat[lastClickedIndex] = null;
+    timesSatHHMM[lastClickedIndex] = null;
 
     document.getElementById("nameInput").value = "";
     document.getElementById("inputPartySize").value = 0;
-    document.getElementById("timeSat").innerHTML = "Table was sat 0 minutes ago."
+    document.getElementById("timeSat").innerHTML = 'Table was sat <span class="info">0</span> minutes ago.';
+    document.getElementById("timeSathhmm").innerHTML = "Sat at 00:00";
 }
 
 //Returns Button From HTML Doc with Table Index

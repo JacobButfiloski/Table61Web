@@ -6,7 +6,7 @@ Reservation = function(lastname, firstname, partysize, time)
 {
     var newReso = new Object();
     globalID += 1;
-    id = globalID;
+    newResp.id = globalID;
     newReso.lastname = lastname;
     newReso.firstname = firstname;
     newReso.partysize = partysize;

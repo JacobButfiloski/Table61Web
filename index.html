@@ -2,69 +2,90 @@
 <link rel="stylesheet" href="main.css">
 <script src="main.js"></script>
 <script src="reservation.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
 <html>
   <head>
     <meta charset="UTF-8">
-    <p id="versionTag">Created by Jake the #1 Host at 1961. Version 1.0.0</p>
-    <input type="button" id="resoButton" value="Edit Resos" onclick="editResosClicked()">
-    <input type ="button" id="unseatAllButton" onclick="unseatAllButtonHandler()" value="Unseat All">
-    <input type = "button" id="viewResos" value="View Resos" onclick="viewResoList()">
-    <input type="button" id="generateTableMap" value="Map Tables" onclick="">
+    <div id="menuDiv">
+      <p id="menuLogo">Table61</p>
+      <div id="menuButtonDiv">
+        <input type="button" class="menuButton" value="Floor Plan" style="color: red;" onclick='menuListener("floor", this)'>
+        <input type="button" class="menuButton" value="Reservations" onclick='menuListener("reservations", this)'>
+        <input type="button" class="menuButton" value="Settings" onclick='menuListener("settings", this)'>
+        <input type="button" class="menuButton" value="Help" onclick='menuListener("help", this)'>
+    </div>
+  </div>
+    <!---<input type="button" id="resoButton" value="Edit Resos" onclick="editResosClicked()">!-->
+    <!--<input type = "button" id="viewResos" value="View Resos" onclick="viewResoList()">!-->
+    <!--<input type="button" id="generateTableMap" value="Map Tables" onclick="">!-->
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
   </head>
   <body>
-    <div id="inputDiv">
-        <label class="inputLabel" style="display: block; color: darkgray;">Name</label>
-        <input style="display: block; background-color: darkgray;" type="text" id="nameInput">
-        <label class="inputLabel" style="display: block; color: darkgray;">Party Size</label>
-        <input type="number" id="inputPartySize" style="background-color: darkgray;">
-        <input type="button" style="background-color: darkgray; display: block; width: 60%; height: 30px; margin : 0 auto; margin-top: 20px;" value="Seat" id="inputDataButton"       onclick="inputDataButtonHandler()">
-        <input type="button" style="background-color: darkgray; display: block; width: 60%; height: 30px; margin : 0 auto;margin-top: 5px;" value="Clear" id="clearDataButton"      onclick="clearButtonHandler()">
-        <p id="timeSat" style="color: darkgray; text-align: center;">Table was sat 0 minutes ago.</p>
-    </div>
-    <div id="visualDiv">
-        <input class="tableButton" type="button" value="1"  id="table1"  onclick="buttonHandler(1)" style="position: absolute; right: 5%; top: 10%; width: 150px">
-        <input class="tableButton" type="button" value="2"  id="table2"  onclick="buttonHandler(2)" style="position: absolute; right: 5%; top: 30%; width: 150px">
-        <input class="tableButton" type="button" value="3"  id="table3"  onclick="buttonHandler(3)" style="position: absolute; right: 5%; top: 50%; width: 150px">
-        <input class="tableButton" type="button" value="4"  id="table4"  onclick="buttonHandler(4)" style="position: absolute; right: 5%; top: 70%; width: 150px">
-        <input class="tableButton" type="button" value="12" id="table12" onclick="buttonHandler(12)" style="position: absolute; right: 20%; top: 25%">
-        <input class="tableButton" type="button" value="13" id="table13" onclick="buttonHandler(13)" style="position: absolute; right: 20%; top: 40%">
-        <input class="tableButton" type="button" value="14" id="table14" onclick="buttonHandler(14)" style="position: absolute; right: 20%; top: 55%">
-        <input class="tableButton" type="button" value="21" id="table21" onclick="buttonHandler(21)" style="position: absolute; right: 35%; top: 8%; width: 200px;">
-        <input class="tableButton" type="button" value="22" id="table22" onclick="buttonHandler(22)" style="position: absolute; right: 30%; top: 20%">
-        <input class="tableButton" type="button" value="23" id="table23" onclick="buttonHandler(23)" style="position: absolute; right: 30%; top: 40%">
-        <input class="tableButton" type="button" value="24" id="table24" onclick="buttonHandler(24)" style="position: absolute; right: 30%; top: 60%">
-        <input class="tableButton" type="button" value="32" id="table32" onclick="buttonHandler(32)" style="position: absolute; right: 40%; top: 20%">
-        <input class="tableButton" type="button" value="33" id="table33" onclick="buttonHandler(33)" style="position: absolute; right: 40%; top: 40%">
-        <input class="tableButton" type="button" value="34" id="table34" onclick="buttonHandler(34)" style="position: absolute; right: 40%; top: 60%">
-        <input class="tableButton" type="button" value="42" id="table42" onclick="buttonHandler(42)" style="position: absolute; right: 50%; top: 25%">
-        <input class="tableButton" type="button" value="43" id="table43" onclick="buttonHandler(43)" style="position: absolute; right: 50%; top: 40%">
-        <input class="tableButton" type="button" value="44" id="table44" onclick="buttonHandler(44)" style="position: absolute; right: 50%; top: 55%">
-        <input class="tableButton" type="button" value="45" id="table45" onclick="buttonHandler(45)" style="position: absolute; right: 50%; top: 70%">
-        <input class="tableButton" type="button" value="52" id="table52" onclick="buttonHandler(52)" style="position: absolute; right: 60%; top: 20%; width: 200px;">
-        <input class="tableButton" type="button" value="53" id="table53" onclick="buttonHandler(53)" style="position: absolute; right: 60%; top: 35%; width: 200px;">
-        <input class="tableButton" type="button" value="54" id="table54" onclick="buttonHandler(54)" style="position: absolute; right: 60%; top: 50%; width: 200px;">
-        <input class="tableButton" type="button" value="55" id="table55" onclick="buttonHandler(55)" style="position: absolute; right: 60%; top: 70%">
-        <input class="tableButton" type="button" value="61" id="table61" onclick="buttonHandler(61)" style="position: absolute; right: 55%; top: 8%">
-    </div>
-    <div id="reservationCreation">
-      <label style="display: block; color: darkgray;">First Name:</label>
-      <input id="firstName" type="text" class="nameInput">
-      <label style="display: block; color: darkgray;">Last Name:</label>
-      <input id="lastName" type="text" class="nameInput">
-      <label style="display: block; color: darkgray;">Party Size:</label>
-      <input id="partySize" type="number" class="nameInput">
-      <label style="display: block; color: darkgray;">Date:</label>
-      <input id="partyDate" type="date" class="nameInput">
-      <label style="display: block; color: darkgray;">Time:</label>
-      <input id="partyTime" type="time" class="nameInput">
-      <input type="button" value = "Submit" style="display: block; margin-top: 10px;" onclick="SubmitClicked()">
-    </div>
-    <div id="resoList">
-      <p style="color: white;" id="resoP">
-        Reservation List:
-      </p>
+    <div id="floorplanDiv">
+      <div id="leftBar">
+        <div id="inputDiv">
+          <label class="inputLabel" style="display: block; color: whitesmoke; margin-left: 3%;">Name</label>
+          <input style="display: block; background-color: whitesmoke;" type="text" id="nameInput">
+          <label class="inputLabel" style="display: block; color: whitesmoke; margin-left: 3%;">Party Size</label>
+          <input type="number" id="inputPartySize" style="background-color: whitesmoke;">
+          <input type="button" style="background-color: whitesmoke; display: block; width: 60%; height: 30px; margin : 0 auto; margin-top: 20px; font-family: 'Roboto', sans-serif;" value="Seat" id="inputDataButton"       onclick="inputDataButtonHandler()">
+          <input type="button" style="background-color: whitesmoke; display: block; width: 60%; height: 30px; margin : 0 auto;margin-top: 5px; font-family: 'Roboto', sans-serif;" value="Clear" id="clearDataButton"      onclick="clearButtonHandler()">
+          <p id="timeSat" style="text-align: center; ">Table was sat <span class="info">0</span> minutes ago.</p>
+          <p id="timeSathhmm" style="color: whitesmoke; text-align: center;">Sat at 00:00</p>
+        </div>
+
+        <div id="reservationList">
+          <div class="resoDiv">
+            <p class="Resotime">3:00</p>
+            <p class="Resoname">Lastname, Firstname</p>
+            <p class="Resonumber">666-777-8888</p>
+          </div>
+          <div class="resoDiv">
+            <p class="Resotime">3:00</p>
+            <p class="Resoname">Lastname, Firstname</p>
+            <p class="Resonumber">666-777-8888</p>
+          </div>
+          <div class="resoDiv">
+            <p class="Resotime">3:00</p>
+            <p class="Resoname">Lastname, Firstname</p>
+            <p class="Resonumber">666-777-8888</p>
+          </div>
+          <div class="resoDiv">
+            <p class="Resotime">3:00</p>
+            <p class="Resoname">Lastname, Firstname</p>
+            <p class="Resonumber">666-777-8888</p>
+          </div>
+        </div>
+      </div>
+      
+      <div id="visualDiv">
+        <input type ="button" id="unseatAllButton" onclick="unseatAllButtonHandler()" value="↻" style="position: absolute;">
+          <input class="tableButton" type="button" value="1"  id="table1"  onclick="buttonHandler(1)" style="position: absolute; right: 5%; top: 10%; width: 150px">
+          <input class="tableButton" type="button" value="2"  id="table2"  onclick="buttonHandler(2)" style="position: absolute; right: 5%; top: 30%; width: 150px">
+          <input class="tableButton" type="button" value="3"  id="table3"  onclick="buttonHandler(3)" style="position: absolute; right: 5%; top: 50%; width: 150px">
+          <input class="tableButton" type="button" value="4"  id="table4"  onclick="buttonHandler(4)" style="position: absolute; right: 5%; top: 70%; width: 150px">
+          <input class="tableButton" type="button" value="12" id="table12" onclick="buttonHandler(12)" style="position: absolute; right: 20%; top: 25%">
+          <input class="tableButton" type="button" value="13" id="table13" onclick="buttonHandler(13)" style="position: absolute; right: 20%; top: 40%">
+          <input class="tableButton" type="button" value="14" id="table14" onclick="buttonHandler(14)" style="position: absolute; right: 20%; top: 55%">
+          <input class="tableButton" type="button" value="21" id="table21" onclick="buttonHandler(21)" style="position: absolute; right: 35%; top: 8%; width: 200px;">
+          <input class="tableButton" type="button" value="22" id="table22" onclick="buttonHandler(22)" style="position: absolute; right: 30%; top: 20%">
+          <input class="tableButton" type="button" value="23" id="table23" onclick="buttonHandler(23)" style="position: absolute; right: 30%; top: 40%">
+          <input class="tableButton" type="button" value="24" id="table24" onclick="buttonHandler(24)" style="position: absolute; right: 30%; top: 60%">
+          <input class="tableButton" type="button" value="32" id="table32" onclick="buttonHandler(32)" style="position: absolute; right: 40%; top: 20%">
+          <input class="tableButton" type="button" value="33" id="table33" onclick="buttonHandler(33)" style="position: absolute; right: 40%; top: 40%">
+          <input class="tableButton" type="button" value="34" id="table34" onclick="buttonHandler(34)" style="position: absolute; right: 40%; top: 60%">
+          <input class="tableButton" type="button" value="42" id="table42" onclick="buttonHandler(42)" style="position: absolute; right: 50%; top: 25%">
+          <input class="tableButton" type="button" value="43" id="table43" onclick="buttonHandler(43)" style="position: absolute; right: 50%; top: 40%">
+          <input class="tableButton" type="button" value="44" id="table44" onclick="buttonHandler(44)" style="position: absolute; right: 50%; top: 55%">
+          <input class="tableButton" type="button" value="45" id="table45" onclick="buttonHandler(45)" style="position: absolute; right: 50%; top: 70%">
+          <input class="tableButton" type="button" value="52" id="table52" onclick="buttonHandler(52)" style="position: absolute; right: 60%; top: 20%; width: 200px;">
+          <input class="tableButton" type="button" value="53" id="table53" onclick="buttonHandler(53)" style="position: absolute; right: 60%; top: 35%; width: 200px;">
+          <input class="tableButton" type="button" value="54" id="table54" onclick="buttonHandler(54)" style="position: absolute; right: 60%; top: 50%; width: 200px;">
+          <input class="tableButton" type="button" value="55" id="table55" onclick="buttonHandler(55)" style="position: absolute; right: 60%; top: 70%">
+          <input class="tableButton" type="button" value="61" id="table61" onclick="buttonHandler(61)" style="position: absolute; right: 55%; top: 8%">
+      </div>
     </div>
   </body>
 </html>
